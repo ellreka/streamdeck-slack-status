@@ -1,6 +1,6 @@
-import { setProfile } from "./../.history/src/slack_20220529001623";
 import dayjs from "dayjs";
 import { ACTIONS } from "./const";
+import { setProfile } from "./slack";
 import { Settings } from "./type";
 
 export let ws: WebSocket | null = null;
