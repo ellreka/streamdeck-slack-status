@@ -2,31 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Slack Status Property Inspector</title>
-    <link rel="stylesheet" href="sdpi.css">
+    <title>net.ellreka.slack-status</title>
+    <link rel="stylesheet" href="./sdpi.css">
     <script src="./pi.js"></script>
   </head>
   
   <body>
     <div class="sdpi-wrapper">
-      <details class="message question">
-        <summary>This is some message</summary>
-      </details>
       <div class="sdpi-item">
         <div class="sdpi-item-label">API Token</div>
         <input class="sdpi-item-value" id="api-token" value="" placeholder="xoxp-xxxxxxxxxxx">
       </div>
-      <div class="sdpi-item">
-        <div class="sdpi-item-label">Status Emoji</div>
-        <input class="sdpi-item-value" id="status-emoji" value="" placeholder=":palm_tree:">
-      </div>
-      <div class="sdpi-item">
-        <div class="sdpi-item-label">Status Text</div>
-        <input class="sdpi-item-value" id="status-text" value="" placeholder="breaktime">
-      </div>
-      <div class="sdpi-item">
-        <div class="sdpi-item-label">Status Expiration</div>
-        <input class="sdpi-item-value" id="status-expiration" value="0" placeholder="1532627506" pattern="\d+">
+      <div type="group" class="sdpi-item" id="settings-group">
+        <div class="sdpi-item">
+          <div class="sdpi-item-label">Status Emoji</div>
+          <input class="sdpi-item-value" id="status-emoji" value="" placeholder=":palm_tree:">
+        </div>
+        <div class="sdpi-item">
+          <div class="sdpi-item-label">Status Text</div>
+          <input class="sdpi-item-value" id="status-text" value="" placeholder="breaktime">
+        </div>
+        <div class="sdpi-item" id="select_single">
+          <div class="sdpi-item-label">Status Expiration</div>
+          <select class="sdpi-item-value select" id="status-expiration" value="0">
+            <option value="0">Don't clear</option>
+            <option value="30m">30 minutes</option>
+            <option value="1h">1 hour</option>
+            <option value="4h">4 hour</option>
+            <option value="today">Today</option>
+            <option value="week">This week</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="sdpi-item" id="custom-expiration-wrapper" style="display: none;">
+          <div class="sdpi-item-label">Custom (minute)</div>
+          <input class="sdpi-item-value" id="custom-expiration" value="" placeholder="120" pattern="\d+">
+        </div>
       </div>
     <div>
   </body>

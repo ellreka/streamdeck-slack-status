@@ -1,7 +1,7 @@
-let ws: WebSocket | null = null;
+import { ACTIONS } from "./const";
+export let ws: WebSocket | null = null;
 let uuid = "";
 
-// @ts-expect-error
 const connectElgatoStreamDeckSocket = (
   inPort: number,
   inPluginUUID: string,
@@ -10,7 +10,7 @@ const connectElgatoStreamDeckSocket = (
   inActionInfo: string
 ) => {
   const actionInfo = JSON.parse(inActionInfo);
-  const settings = actionInfo.payload.settings;
+  let settings = actionInfo.payload.settings;
   console.log({ settings });
   uuid = inPluginUUID;
   ws = new WebSocket(`ws://127.0.0.1:${inPort}`);
@@ -34,48 +34,106 @@ const connectElgatoStreamDeckSocket = (
     );
   });
 
+  ws.addEventListener("message", ({ data }) => {
+    const { event, payload } = JSON.parse(data);
+
+    switch (event) {
+      case "didReceiveGlobalSettings":
+        settings = payload.settings;
+        break;
+    }
+  });
+
+  switch (actionInfo.action) {
+    case ACTIONS.CLEAR_STATUS:
+      const settingsGroup =
+        document.querySelector<HTMLDivElement>("#settings-group");
+      if (settingsGroup != null) {
+        settingsGroup.style.display = "none";
+      }
+      break;
+  }
+
   const apiToken = document.querySelector<HTMLInputElement>("#api-token");
   const statusEmoji = document.querySelector<HTMLInputElement>("#status-emoji");
   const statusText = document.querySelector<HTMLInputElement>("#status-text");
   const statusExpiration =
     document.querySelector<HTMLInputElement>("#status-expiration");
-
+  const customExpiration =
+    document.querySelector<HTMLInputElement>("#custom-expiration");
+  const customExpirationWrapper = document.querySelector<HTMLInputElement>(
+    "#custom-expiration-wrapper"
+  );
+  const getPayload = (value: string, key: string) => {
+    const obj = {
+      apiToken: apiToken?.value ?? "",
+      statusEmoji: statusEmoji?.value ?? "",
+      statusText: statusText?.value ?? "",
+      statusExpiration: statusExpiration?.value ?? "",
+      customExpiration: customExpiration?.value ?? "",
+    };
+    return {
+      ...obj,
+      [key]: value,
+    };
+  };
   if (apiToken != null) {
     apiToken.value = settings?.apiToken ?? "";
     apiToken.addEventListener("change", (event: any) => {
-      sendValueToPlugin(event.target.value, "apiToken", settings);
+      sendValueToPlugin(getPayload(event.target.value, "apiToken"));
     });
   }
   if (statusEmoji != null) {
     statusEmoji.value = settings?.statusEmoji ?? "";
     statusEmoji.addEventListener("change", (event: any) => {
-      sendValueToPlugin(event.target.value, "statusEmoji", settings);
+      sendValueToPlugin(getPayload(event.target.value, "statusEmoji"));
     });
   }
   if (statusText != null) {
     statusText.value = settings?.statusText ?? "";
     statusText.addEventListener("change", (event: any) => {
-      sendValueToPlugin(event.target.value, "statusText", settings);
+      sendValueToPlugin(getPayload(event.target.value, "statusText"));
     });
   }
   if (statusExpiration != null) {
     statusExpiration.value = settings?.statusExpiration ?? "";
     statusExpiration.addEventListener("change", (event: any) => {
-      sendValueToPlugin(event.target.value, "statusExpiration", settings);
+      sendValueToPlugin(getPayload(event.target.value, "statusExpiration"));
+
+      if (customExpirationWrapper != null) {
+        if (event.target.value === "custom") {
+          customExpirationWrapper.style.display = "flex";
+        } else {
+          customExpirationWrapper.style.display = "none";
+        }
+      }
+    });
+  }
+  if (customExpirationWrapper != null && statusExpiration != null) {
+    if (statusExpiration.value === "custom") {
+      customExpirationWrapper.style.display = "flex";
+    } else {
+      customExpirationWrapper.style.display = "none";
+    }
+  }
+  if (customExpiration != null) {
+    customExpiration.value = settings?.customExpiration ?? "";
+    customExpiration.addEventListener("change", (event: any) => {
+      sendValueToPlugin(getPayload(event.target.value, "customExpiration"));
     });
   }
 };
 
-const sendValueToPlugin = (value: string, param: string, settings: any) => {
+const sendValueToPlugin = (payload: any) => {
   if (ws == null) return;
   ws.send(
     JSON.stringify({
       event: "setSettings",
       context: uuid,
-      payload: {
-        ...settings,
-        [param]: value,
-      },
+      payload,
     })
   );
 };
+
+(window as any)["connectElgatoStreamDeckSocket"] =
+  connectElgatoStreamDeckSocket;

@@ -15,10 +15,20 @@
           "Image": "sample-action-key"
         }
       ]
+    },
+    {
+      "Name": "Clear Slack Status",
+      "UUID": "net.ellreka.slack-status.clear-status",
+      "Icon": "sample-action",
+      "States": [
+        {
+          "Image": "sample-action-key"
+        }
+      ]
     }
   ],
   "PropertyInspectorPath": "./dist/pi.html",
-  "URL": "https://ellreka.net",
+  "URL": "https://github.com/ellreka/streamdeck-slack-status",
   "SDKVersion": 2,
   "OS": [
     {

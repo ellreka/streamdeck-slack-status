@@ -1,21 +1,23 @@
-const ACTIONS = {
-  UPDATE_STATUS: "net.ellreka.slack-status.update-status",
-};
+import { setProfile } from "./../.history/src/slack_20220529001623";
+import dayjs from "dayjs";
+import { ACTIONS } from "./const";
+import { Settings } from "./type";
 
-// @ts-expect-error
+export let ws: WebSocket | null = null;
+
 const connectElgatoStreamDeckSocket = (
   inPort: number,
   inPluginUUID: string,
   inRegisterEvent: any,
   inInfo: any
 ) => {
-  const ws = new WebSocket(`ws://127.0.0.1:${inPort}`);
+  ws = new WebSocket(`ws://127.0.0.1:${inPort}`);
   ws.addEventListener("open", () => {
     console.log({
       event: inRegisterEvent,
       uuid: inPluginUUID,
     });
-    ws.send(
+    ws?.send(
       JSON.stringify({
         event: inRegisterEvent,
         uuid: inPluginUUID,
@@ -26,12 +28,15 @@ const connectElgatoStreamDeckSocket = (
   ws.addEventListener("message", async (e) => {
     const data = JSON.parse(e.data);
     const { event, payload, action } = data;
-    console.log(data);
+    console.table(payload?.settings);
     switch (event) {
       case "keyDown":
         switch (action) {
           case ACTIONS.UPDATE_STATUS:
             await changeStatus(payload.settings);
+            break;
+          case ACTIONS.CLEAR_STATUS:
+            await clearStatus(payload.settings);
             break;
         }
         break;
@@ -39,29 +44,57 @@ const connectElgatoStreamDeckSocket = (
   });
 };
 
-const changeStatus = async (payload: {
-  apiToken: string;
-  statusText: string;
-  statusEmoji: string;
-  statusExpiration: string;
-}) => {
-  console.log({ payload });
+const changeStatus = async (settings: Settings) => {
+  const {
+    statusExpiration,
+    statusEmoji,
+    statusText,
+    apiToken,
+    customExpiration,
+  } = settings;
+  const getExpiration = () => {
+    switch (statusExpiration) {
+      case "30m":
+        return dayjs().add(30, "minute").unix();
+      case "1h":
+        return dayjs().add(1, "hour").unix();
+      case "4h":
+        return dayjs().add(4, "hour").unix();
+      case "today":
+        return dayjs().endOf("day").unix();
+      case "week":
+        return dayjs().endOf("week").unix();
+      case "custom":
+        return dayjs().add(Number(customExpiration), "minute").unix();
+      case "0":
+      default:
+        return 0;
+    }
+  };
+
   const data = {
     profile: {
-      status_emoji: payload.statusEmoji,
-      status_text: payload.statusText,
-      status_expiration: Number(payload.statusExpiration),
+      status_emoji: statusEmoji,
+      status_text: statusText,
+      status_expiration: getExpiration(),
     },
   };
-  const response = await fetch("https://slack.com/api/users.profile.set", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      Authorization: `Bearer ${payload.apiToken}`,
-    },
-    body: JSON.stringify(data),
-  }).then((res) => {
-    return res.json();
-  });
+  const response = await setProfile(apiToken, data);
   console.log(response);
 };
+
+const clearStatus = async (settings: Settings) => {
+  const { apiToken } = settings;
+  const data = {
+    profile: {
+      status_emoji: "",
+      status_text: "",
+      status_expiration: 0,
+    },
+  };
+  const response = await setProfile(apiToken, data);
+  console.log(response);
+};
+
+(window as any)["connectElgatoStreamDeckSocket"] =
+  connectElgatoStreamDeckSocket;
