@@ -3,26 +3,33 @@
   "Description": "",
   "Version": "1.0.0",
   "Author": "ellreka",
-  "Icon": "icon",
+  "Icon": "images/icon",
+  "Category": "Slack Status",
+  "CategoryIcon": "images/categoryIcon",
   "CodePath": "./dist/code.html",
   "Actions": [
     {
       "Name": "Update Slack Status",
       "UUID": "net.ellreka.slack-status.update-status",
-      "Icon": "sample-action",
+      "Icon": "images/actionIcon",
       "States": [
         {
-          "Image": "sample-action-key"
+          "Image": "images/icon",
+          "TitleAlignment": "bottom",
+          "FontSize": "12"
         }
       ]
     },
     {
       "Name": "Clear Slack Status",
       "UUID": "net.ellreka.slack-status.clear-status",
-      "Icon": "sample-action",
+      "Icon": "images/actionIcon",
       "States": [
         {
-          "Image": "sample-action-key"
+          "Image": "images/icon",
+          "TitleAlignment": "bottom",
+          "FontSize": "12",
+          "Title": "Clear"
         }
       ]
     }
@@ -41,6 +48,6 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "4.1"
+    "MinimumVersion": "5.0"
   }
 }
