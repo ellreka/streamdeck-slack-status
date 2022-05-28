@@ -1,0 +1,36 @@
+{
+  "Name": "Stream Deck Slack Status",
+  "Description": "",
+  "Version": "1.0.0",
+  "Author": "ellreka",
+  "Icon": "icon",
+  "CodePath": "./dist/code.html",
+  "Actions": [
+    {
+      "Name": "Update Slack Status",
+      "UUID": "net.ellreka.slack-status.update-status",
+      "Icon": "sample-action",
+      "States": [
+        {
+          "Image": "sample-action-key"
+        }
+      ]
+    }
+  ],
+  "PropertyInspectorPath": "./dist/pi.html",
+  "URL": "https://ellreka.net",
+  "SDKVersion": 2,
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.11"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "4.1"
+  }
+}
