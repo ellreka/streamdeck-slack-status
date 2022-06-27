@@ -2,11 +2,11 @@
 
 This plugin updates the slack status.
 
-![screenshot](./images/readme/image2.png)
+![screenshot](./images/image2.png)
 
 ## Setup
 
-![screenshot](./images/readme/image1.png)
+![screenshot](./images/image1.png)
 
 ## Actions
 

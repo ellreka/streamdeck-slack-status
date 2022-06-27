@@ -1,12 +1,12 @@
 {
   "Name": "Stream Deck Slack Status",
-  "Description": "",
+  "Description": "This plugin updates the slack status.",
   "Version": "1.0.0",
   "Author": "ellreka",
   "Icon": "images/icon",
   "Category": "Slack Status",
   "CategoryIcon": "images/categoryIcon",
-  "CodePath": "./dist/code.html",
+  "CodePath": "code.html",
   "Actions": [
     {
       "Name": "Update Slack Status",
@@ -34,7 +34,7 @@
       ]
     }
   ],
-  "PropertyInspectorPath": "./dist/pi.html",
+  "PropertyInspectorPath": "pi.html",
   "URL": "https://github.com/ellreka/streamdeck-slack-status",
   "SDKVersion": 2,
   "OS": [

@@ -5,10 +5,11 @@
   "license": "MIT",
   "author": "ellreka",
   "scripts": {
-    "build:main": "esbuild ./src/main.ts --bundle --outfile=./dist/main.js --target=esnext",
-    "build:pi": "esbuild ./src/pi.ts --bundle --outfile=./dist/pi.js --target=esnext",
+    "build:main": "esbuild ./src/main.ts --bundle --outfile=./net.ellreka.slack-status.sdPlugin/main.js --target=esnext",
+    "build:pi": "esbuild ./src/pi.ts --bundle --outfile=./net.ellreka.slack-status.sdPlugin/pi.js --target=esnext",
     "dev": "yarn concurrently \"yarn build:main --watch\" \"yarn build:pi --watch\"",
-    "build": "yarn build:main && yarn build:pi"
+    "build": "yarn build:main && yarn build:pi",
+    "release": "rm -f ./Release/* && ./bin/DistributionTool -b -i net.ellreka.slack-status.sdPlugin -o ./Release"
   },
   "devDependencies": {},
   "dependencies": {

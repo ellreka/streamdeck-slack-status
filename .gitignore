@@ -1,5 +1,3 @@
 node_modules
-dist/*
-!dist/*.html
-!dist/*.css
+net.ellreka.slack-status.sdPlugin/*.js
 *.log
