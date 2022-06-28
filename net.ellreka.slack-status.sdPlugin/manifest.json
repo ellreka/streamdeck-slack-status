@@ -1,6 +1,6 @@
 {
-  "Name": "Stream Deck Slack Status",
-  "Description": "This plugin updates the slack status.",
+  "Name": "Slack Status",
+  "Description": "Update the slack status.",
   "Version": "1.0.0",
   "Author": "ellreka",
   "Icon": "images/icon",
