@@ -1,3 +1,5 @@
 node_modules
 net.ellreka.slack-status.sdPlugin/*.js
 *.log
+*.zip
+DS_Store

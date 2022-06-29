@@ -64,6 +64,8 @@ const connectElgatoStreamDeckSocket = (
   const customExpirationWrapper = document.querySelector<HTMLInputElement>(
     "#custom-expiration-wrapper"
   );
+  const howtoButton =
+    document.querySelector<HTMLButtonElement>("#howto-button");
   const getPayload = (value: string, key: string) => {
     const obj = {
       apiToken: apiToken?.value ?? "",
@@ -122,6 +124,11 @@ const connectElgatoStreamDeckSocket = (
       sendValueToPlugin(getPayload(event.target.value, "customExpiration"));
     });
   }
+  if (howtoButton != null) {
+    howtoButton.addEventListener("click", () => {
+      openUrl("https://github.com/ellreka/streamdeck-slack-status#setup");
+    });
+  }
 };
 
 const sendValueToPlugin = (payload: any) => {
@@ -131,6 +138,19 @@ const sendValueToPlugin = (payload: any) => {
       event: "setSettings",
       context: uuid,
       payload,
+    })
+  );
+};
+
+const openUrl = (url: string) => {
+  if (ws == null) return;
+  ws.send(
+    JSON.stringify({
+      event: "openUrl",
+      context: uuid,
+      payload: {
+        url,
+      },
     })
   );
 };
