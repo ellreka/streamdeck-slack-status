@@ -6,9 +6,13 @@ This plugin updates the slack status.
 
 ## Installation
 
+Install from the [store page](https://apps.elgato.com/plugins/net.ellreka.slack-status).
+
+### Manually
+
 Download the plugin. [here](https://github.com/ellreka/streamdeck-slack-status/tree/main/Release)
 
-Open net.ellreka.slack-status.streamDeckPlugin file.
+Open `net.ellreka.slack-status.streamDeckPlugin` file.
 
 ## Setup
 
