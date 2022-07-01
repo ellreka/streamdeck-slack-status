@@ -10,7 +10,7 @@ Install from the [store page](https://apps.elgato.com/plugins/net.ellreka.slack-
 
 ### Manually
 
-Download the plugin. [here](https://github.com/ellreka/streamdeck-slack-status/tree/main/Release)
+Download the plugin. [here](https://github.com/ellreka/streamdeck-slack-status/releases)
 
 Open `net.ellreka.slack-status.streamDeckPlugin` file.
 
