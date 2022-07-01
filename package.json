@@ -9,7 +9,7 @@
     "build:pi": "esbuild ./src/pi.ts --bundle --outfile=./net.ellreka.slack-status.sdPlugin/pi.js --target=esnext",
     "dev": "yarn concurrently \"yarn build:main --watch\" \"yarn build:pi --watch\"",
     "build": "yarn build:main && yarn build:pi",
-    "build:release": "rm -f ./Release/* && ./bin/DistributionTool -b -i net.ellreka.slack-status.sdPlugin -o ./Release"
+    "build:release": "rm -f net.ellreka.slack-status.streamDeckPlugin && ./bin/DistributionTool -b -i net.ellreka.slack-status.sdPlugin -o ."
   },
   "devDependencies": {},
   "dependencies": {
