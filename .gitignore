@@ -3,3 +3,4 @@ net.ellreka.slack-status.sdPlugin/*.js
 *.log
 *.zip
 DS_Store
+net.ellreka.slack-status.streamDeckPlugin
