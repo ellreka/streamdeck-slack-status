@@ -9,7 +9,7 @@
     "build:pi": "esbuild ./src/pi.ts --bundle --outfile=./net.ellreka.slack-status.sdPlugin/pi.js --target=esnext",
     "dev": "yarn concurrently \"yarn build:main --watch\" \"yarn build:pi --watch\"",
     "build": "yarn build:main && yarn build:pi",
-    "release": "rm -f ./Release/* && ./bin/DistributionTool -b -i net.ellreka.slack-status.sdPlugin -o ./Release"
+    "build:release": "rm -f ./Release/* && ./bin/DistributionTool -b -i net.ellreka.slack-status.sdPlugin -o ./Release"
   },
   "devDependencies": {},
   "dependencies": {
@@ -17,5 +17,8 @@
     "dayjs": "^1.11.2",
     "esbuild": "^0.14.41",
     "typescript": "^4.7.2"
+  },
+  "volta": {
+    "node": "16.10.0"
   }
 }
