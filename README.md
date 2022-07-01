@@ -21,10 +21,10 @@ Open `net.ellreka.slack-status.streamDeckPlugin` file.
 ### How to get the slack token
 
 1. Create [App](https://api.slack.com/apps) on Slack.
-2. Add `User Token Scopes` in the `OAuth & Permissions` section.
+2. Add **User Token Scope** in the **OAuth & Permissions** section.
    - `users.profile:write`
 3. Install App.
-4. Copy `User OAuth Token`.
+4. Copy **User OAuth Token** (`xoxp-xxxxxxxxxxxxxx`).
 
 ## Actions
 
