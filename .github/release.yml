@@ -1,4 +1,15 @@
 changelog:
   exclude:
     labels:
+      - ignore-for-release
       - tagpr
+  categories:
+    - title: Fixed
+      labels:
+        - bug
+    - title: Added
+      labels:
+        - enhancement
+    - title: Changed
+      labels:
+        - "*"
