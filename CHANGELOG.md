@@ -5,10 +5,6 @@
 - docs: update README by @ellreka in https://github.com/ellreka/streamdeck-slack-status/pull/7
 - chore: add tagpr by @ellreka in https://github.com/ellreka/streamdeck-slack-status/pull/8
 
-## Unreleased
-
-- Nothing yet.
-
 ## [1.0.1] 2022-06-29
 
 ### Added
