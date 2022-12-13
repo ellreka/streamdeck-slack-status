@@ -1,7 +1,7 @@
 {
   "Name": "Slack Status",
   "Description": "Update the slack status.",
-  "Version": "1.0.1",
+  "Version": "1.0.2",
   "Author": "ellreka",
   "Icon": "images/icon",
   "Category": "Slack Status",
