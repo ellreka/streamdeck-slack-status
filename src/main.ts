@@ -93,15 +93,20 @@ const changeStatus = async (settings: Settings) => {
 
 const clearStatus = async (settings: Settings) => {
   const { apiToken } = settings
-  const data = {
+  const dataProfile = {
     profile: {
       status_emoji: '',
       status_text: '',
       status_expiration: 0,
     },
   }
-  const response = await setProfile(apiToken, data)
-  console.log(response)
+  const dataPresence = {
+    presence: 'auto',
+  }
+  const profileResponse = await setProfile(apiToken, dataProfile)
+  console.log(profileResponse)
+  const presenceResponse = await setPresence(apiToken, dataPresence)
+  console.log(presenceResponse)
 }
 
 ;(window as any)['connectElgatoStreamDeckSocket'] = connectElgatoStreamDeckSocket
